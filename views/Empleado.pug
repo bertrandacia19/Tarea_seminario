@@ -1,0 +1,89 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        link(rel="stylesheet", href="css/navbar-top.css")
+        link(rel='stylesheet' href='https://use.fontawesome.com/releases/v5.8.1/css/all.css' integrity='sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf' crossorigin='anonymous')
+        link(href='https://fonts.googleapis.com/css?family=Poppins:200i,300,400&display=swap' rel='stylesheet')
+        <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" data-auto-replace-svg="nest"></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        title Document
+    body 
+   
+ul
+  li
+    a(href='/') Empleados
+
+
+
+h3 Registro De Empleados 
+div
+  form(action="/Empleado" method="post")
+    label(for='nombre_emp') Nombre
+    input#nombre_emp(type='text' name='nombre_emp' placeholder=' ' required="required")
+    label(for='apellido_emp') Apellido
+    input#apellido_emp(type='text' name='apellido_emp' placeholder=' ' required="required")
+    label(for='edad_emp') Edad
+    input#edad_emp(type='text' name='edad_emp' placeholder=' ' required="required")
+    label(for='telefono_emp') Telefono
+    input#telefono_emp(type='text' name='telefono_emp' placeholder=' ' required="required")
+    label(for='corre_emp') Correo 
+    input#corre_emp(type='text' name='corre_emp' placeholder=' ' required="required")
+    label(for='direccion_emp') Direccion
+    input#direccion_emp(type='text' name='direccion_emp' placeholder=' ' required="required")
+    label(for='id_depart') Departamento
+    select#id_depart(name='id_depart')
+        each d in departamentos
+            option(value=d.id_depart) #{d.nombre_depart}
+      
+    input(type='submit' value='Agregar')
+
+br
+br
+
+form(action="/eliminarempleado" method="post")
+        .form-group.mt-3
+            label.fw-bold(for="id_emp") Datos de Empleados
+                br
+                input.form-control.agregar(type='number' placeholder=' ID del empleado' name="id_emp" required)
+                button.agregar.btn.btn-lg.btn-danger(type="submit") Eliminar 
+
+br
+br
+.container
+        table.table.table.table-striped
+            thead
+                tr
+                    th #
+                    th  nombre
+                    th Apellido
+                    th edad 
+                    th Telefono 
+                    th correo
+                    th Dirección 
+                    th Departamento
+                    th Acciones
+
+                tbody
+                    if empleados.length
+                    each e in empleados
+                        tr
+                            td #{e.id_emp}
+                            td #{e.nombre_emp}
+                            td #{e.apellido_emp}
+                            td #{e.edad_emp}
+                            td #{e.telefono_emp}
+                            td #{e.corre_emp}
+                            td #{e.direccion_emp}
+                            td #{e.id_depart}
+                            td.text-center
+                                td.text-center
+                                    a.btn.btn-lg.btn-warning(href='/eliminardepa/<%= departamentos.id_depart %>') Editar
+
+                    else
+                        tr
+                            td.text-orange.text-center.fw-bold(colspan='7') No se encuentran Empleados
+
+                
